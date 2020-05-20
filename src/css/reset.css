@@ -57,3 +57,11 @@ table {
   border-radius: 3px;
   background-color: rgb(225, 225, 226);
 }
+
+button, input{
+  outline: none;
+}
+
+input{
+  border: none;
+}

@@ -14,4 +14,5 @@ app.on('ready', () => {
   })
   const url = idDev ? 'http://localhost:8080/' : 'dummyUrl'
   mainWindow.loadURL(url)
+  mainWindow.webContents.openDevTools({ mode: 'detach' })
 })
