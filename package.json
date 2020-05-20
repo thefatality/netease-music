@@ -2,10 +2,13 @@
   "name": "netease-music",
   "version": "0.1.0",
   "private": true,
+  "main": "elec.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "elec": "electron .",
+    "dev": "concurrently \"wait-on http-get://localhost:8080/ && electron .\" \"npm run serve\""
   },
   "dependencies": {
     "core-js": "^3.6.4",
@@ -21,6 +24,9 @@
     "@vue/cli-service": "~4.3.0",
     "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
+    "concurrently": "^5.2.0",
+    "electron": "^9.0.0",
+    "electron-is-dev": "^1.2.0",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
@@ -29,6 +35,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "wait-on": "^5.0.0"
   }
 }
