@@ -2,18 +2,18 @@
   <div id="app">
     <title-bar></title-bar>
     <router-view/>
-    <foot-bar></foot-bar>
+    <play-bar></play-bar>
   </div>
 </template>
 
 <script lang="js">
 import TitleBar from './components/TitleBar'
-import FootBar from './components/FootBar'
+import PlayBar from './components/PlayBar'
 export default {
   name: 'App',
   components: {
     TitleBar,
-    FootBar
+    PlayBar
   }
 }
 </script>

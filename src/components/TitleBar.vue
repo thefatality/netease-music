@@ -2,12 +2,20 @@
   <div id="title-bar" :class="theme">
     <div class="left-wrapper">
       <div class="logo"></div>
-      <button class="history-btn next pointer"></button>
-      <button class="history-btn prev pointer"></button>
+      <button class="history-btn next pointer">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-icon_arrow_left"></use>
+        </svg>
+      </button>
+      <button class="history-btn prev pointer">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-jiantouyou"></use>
+        </svg>
+      </button>
       <div class="search-wrapper">
         <input type="text" placeholder="搜索音乐，视频，歌词，电台" class="search-inp"/>
         <svg class="icon search-icon" aria-hidden="true">
-          <use xlink:href="#icon-shezhi"></use>
+          <use xlink:href="#icon-fangdajing"></use>
         </svg>
       </div>
     </div>
