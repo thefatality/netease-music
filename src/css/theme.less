@@ -1,0 +1,56 @@
+.cool-black {
+  background: rgb(34, 34, 34);
+  border-color: rgb(34, 34, 34);
+}
+
+.official-red {
+  background: rgb(198, 47, 47);
+  border-color: rgb(198, 47, 47);
+}
+
+.cute-pink {
+  background: rgb(250, 136, 176);
+  border-color: rgb(250, 136, 176);
+}
+
+.sky-blue {
+  #title-bar { // 头部菜单栏 components/app/TitleBar.vue
+    background: rgb(83, 178, 250);
+  }
+
+  #menu-list { // 左侧导航栏 components/app/MenuList.vue
+    .menu-item.active {
+      border-color: rgb(83, 178, 250);
+    }
+  }
+
+  #foot-bar { // 底部播放栏 components/app/PlayBar.vue
+    .prev-song,
+    .play-stop-song,
+    .next-song,
+    .current-line,
+    .inside {
+      background-color: rgb(83, 178, 250);
+    }
+  }
+
+  #find-music-nav { // 发现音乐导航条 views/findMusic/Nav.vue
+    .nav-list {
+      .nav-item {
+        &.active {
+          color: rgb(83, 178, 250);
+        }
+      }
+    }
+  }
+}
+
+.fresh-green {
+  background: rgb(69, 190, 122);
+  border-color: rgb(69, 190, 122);
+}
+
+.wealthy-gold {
+  background: rgb(210, 143, 71);
+  border-color: rgb(210, 143, 71);
+}

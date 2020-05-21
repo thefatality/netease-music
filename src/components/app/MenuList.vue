@@ -2,7 +2,7 @@
   <div id="menu-list">
     <p class="level1">推荐</p>
     <ul class="menu">
-      <li class="menu-item active" :class="theme">
+      <li class="menu-item active">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-yinle"></use>
         </svg>
@@ -121,7 +121,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
   name: 'MenuList',
   data () {
@@ -137,11 +136,6 @@ export default {
     collectSongListHandler () {
       this.showCollectSongList = !this.showCollectSongList
     }
-  },
-  computed: {
-    ...mapState([
-      'theme'
-    ])
   }
 }
 </script>

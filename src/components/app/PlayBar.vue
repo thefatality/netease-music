@@ -1,17 +1,17 @@
 <template>
   <div id="foot-bar">
     <div class="operate-song-wrapper">
-      <div class="prev-song" :class="theme">
+      <div class="prev-song">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-shangyishou"></use>
         </svg>
       </div>
-      <div class="play-stop-song" :class="theme">
+      <div class="play-stop-song">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-arrow-"></use>
         </svg>
       </div>
-      <div class="next-song" :class="theme">
+      <div class="next-song">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-xiayishou"></use>
         </svg>
@@ -21,9 +21,9 @@
       <span class="current">00:00</span>
       <div class="line-wrapper">
         <div class="total-line">
-          <div class="current-line" :class="theme">
+          <div class="current-line">
             <div class="line-btn">
-              <div class="inside" :class="theme"></div>
+              <div class="inside"></div>
             </div>
           </div>
         </div>
@@ -36,9 +36,9 @@
       </svg>
       <div class="line-wrapper">
         <div class="total-line">
-          <div class="current-line" :class="theme">
+          <div class="current-line">
             <div class="line-btn">
-              <div class="inside" :class="theme"></div>
+              <div class="inside"></div>
             </div>
           </div>
         </div>
@@ -65,15 +65,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
-  name: 'FootBar',
-  computed: {
-    ...mapState([
-      'theme'
-    ])
-  }
+  name: 'FootBar'
 }
 </script>
 

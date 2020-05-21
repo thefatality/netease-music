@@ -1,5 +1,5 @@
 <template>
-  <div id="title-bar" :class="theme">
+  <div id="title-bar">
     <div class="left-wrapper">
       <div class="logo"></div>
       <button class="history-btn next pointer">
@@ -57,20 +57,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 
 export default {
-  name: 'TitleBar',
-  computed: {
-    ...mapState([
-      'theme'
-    ])
-  }
+  name: 'TitleBar'
 }
 </script>
 
 <style scoped lang="less">
-  @import url(../css/variable);
+  @import url(../../css/variable);
 
   #title-bar {
     display: flex;

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="theme">
     <title-bar></title-bar>
     <div class="main-content">
       <div class="side">
@@ -12,15 +12,21 @@
 </template>
 
 <script lang="js">
-import TitleBar from './components/TitleBar'
-import PlayBar from './components/PlayBar'
-import MenuList from './components/MenuList'
+import TitleBar from './components/app/TitleBar'
+import PlayBar from './components/app/PlayBar'
+import MenuList from './components/app/MenuList'
+import { mapState } from 'vuex'
 export default {
   name: 'App',
   components: {
     TitleBar,
     PlayBar,
     MenuList
+  },
+  computed: {
+    ...mapState([
+      'theme'
+    ])
   }
 }
 </script>
@@ -28,6 +34,7 @@ export default {
 <style lang="less">
   #app{
     .main-content{
+      display: flex;
       height: calc(100vh - 100px); // TitleBar PlayBar的高度都为50px
       .side{
         height: 100%;
