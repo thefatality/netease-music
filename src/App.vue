@@ -36,6 +36,7 @@ export default {
     .main-content{
       display: flex;
       height: calc(100vh - 100px); // TitleBar PlayBar的高度都为50px
+      background: rgb(250, 250, 250);
       .side{
         height: 100%;
       }

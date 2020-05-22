@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "elec.js",
+  "proxy":"http://localhost:3000",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -11,8 +12,12 @@
     "dev": "concurrently \"wait-on http-get://localhost:8080/ && electron .\" \"npm run serve\""
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "swiper": "^5.4.1",
     "vue": "^2.6.11",
+    "vue-awesome-swiper": "^4.1.1",
+    "vue-axios": "^2.1.5",
     "vue-router": "^3.1.6",
     "vuex": "^3.1.3"
   },

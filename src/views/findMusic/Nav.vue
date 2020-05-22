@@ -18,17 +18,19 @@ export default {
 </script>
 
 <style scoped lang="less">
-  #find-music-nav{
-    .nav-list{
-      border-bottom: 1px solid rgb(225,225,226);
+  #find-music-nav {
+    .nav-list {
+      border-bottom: 1px solid rgb(225, 225, 226);
       text-align: center;
       font-size: 15px;
-      color: rgb(51,51,51);
-      .nav-item{
+      color: rgb(51, 51, 51);
+
+      .nav-item {
         display: inline-block;
         margin-right: 45px;
         line-height: 45px;
-        &.active{
+
+        &.active {
           border-bottom-width: 2px;
           border-bottom-style: solid;
         }

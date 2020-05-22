@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/findmusic',
     name: 'findMusic',
-    component: () => import('../views/findMusic/FindMusic.vue')
+    component: () => import('../views/findMusic/Index.vue')
     // children: [{}]
   }
 ]

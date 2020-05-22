@@ -61,12 +61,27 @@
         <use xlink:href="#icon-yinlianglabashengyin"></use>
       </svg>
     </div>
+    <audio :src="currentSong.url" ref="audio"></audio>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'FootBar'
+  name: 'FootBar',
+  computed: {
+    ...mapState([
+      'currentSong'
+    ])
+  },
+  watch: {
+    currentSong () {
+      console.log(this.currentSong.url)
+      this.$nextTick(() => {
+        this.$refs.audio.play()
+      })
+    }
+  }
 }
 </script>
 
