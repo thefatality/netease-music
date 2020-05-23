@@ -6,9 +6,16 @@
           <use xlink:href="#icon-shangyishou"></use>
         </svg>
       </div>
-      <div class="play-stop-song">
-        <svg class="icon" aria-hidden="true">
+      <div
+        class="play-stop-song"
+        :class="{hack: status === 'stop'}"
+        @click="changeStatusHandler"
+      >
+        <svg class="icon" aria-hidden="true" v-show="status === STATUS_ENUM.STOP">
           <use xlink:href="#icon-arrow-"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true" v-show="status === STATUS_ENUM.PLAY">
+          <use xlink:href="#icon-zanting"></use>
         </svg>
       </div>
       <div class="next-song">
@@ -18,7 +25,7 @@
       </div>
     </div>
     <div class="process-wrapper">
-      <span class="current">00:00</span>
+      <span class="current">{{currentTime}}</span>
       <div class="line-wrapper">
         <div class="total-line">
           <div class="current-line">
@@ -28,7 +35,7 @@
           </div>
         </div>
       </div>
-      <span class="total">00:00</span>
+      <span class="total">{{totalTime}}</span>
     </div>
     <div class="volume-wrapper">
       <svg class="icon" aria-hidden="true">
@@ -61,25 +68,62 @@
         <use xlink:href="#icon-yinlianglabashengyin"></use>
       </svg>
     </div>
-    <audio :src="currentSong.url" ref="audio"></audio>
+    <audio
+      :src="currentSong.url"
+      ref="audio"
+      @canplay="canPlayHandler"
+      @ended="endedHandler"
+    />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+
+const STATUS_ENUM = {
+  STOP: 'stop',
+  PLAY: 'play'
+}
+
 export default {
   name: 'FootBar',
+  data () {
+    return {
+      STATUS_ENUM,
+      currentTime: '00:00',
+      totalTime: '00:00',
+      status: STATUS_ENUM.STOP,
+      timer: 0
+    }
+  },
   computed: {
     ...mapState([
       'currentSong'
     ])
   },
+  methods: {
+    canPlayHandler () {
+      this.totalTime = this._formatTime(this.$refs.audio.duration | 0)
+      this.status = this.STATUS_ENUM.PLAY
+    },
+    endedHandler () {
+      this.status = this.STATUS_ENUM.STOP
+    },
+    changeStatusHandler () {
+      this.status = this.status === this.STATUS_ENUM.STOP
+        ? this.STATUS_ENUM.PLAY
+        : this.STATUS_ENUM.STOP
+    },
+    _formatTime (time) {
+      const minute = (time / 60) | 0
+      const second = time - minute * 60
+      return `${minute >= 10 ? minute : '0' + minute}:${second >= 10 ? second : '0' + second}`
+    }
+  },
   watch: {
-    currentSong () {
-      console.log(this.currentSong.url)
-      this.$nextTick(() => {
-        this.$refs.audio.play()
-      })
+    status (newVal, oldVal) {
+      const audio = this.$refs.audio
+      this.status === this.STATUS_ENUM.PLAY ? audio.play() : audio.pause()
     }
   }
 }
@@ -164,9 +208,13 @@ export default {
       }
 
       .play-stop-song {
+        box-sizing: border-box;
         width: 36px;
         height: 36px;
         font-size: 18px;
+        &.hack{ // 看起来不居中 调整一下
+          padding-left: 3px;
+        }
       }
     }
 
@@ -175,12 +223,14 @@ export default {
 
       .current {
         margin-right: 14px;
+        font-size: 13px;
       }
       .line-wrapper{
         flex: 1;
       }
       .total {
         margin-left: 14px;
+        font-size: 13px;
       }
     }
 

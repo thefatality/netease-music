@@ -1,6 +1,6 @@
 <template>
   <div id="find-music-banner">
-    <swiper ref="mySwiper" :options="swiperOptions" class="swiper-box">
+    <swiper ref="swiper" :options="swiperOptions" class="swiper-box">
       <swiper-slide
         class="swiper-slide"
         v-for="banner in banners"
@@ -13,7 +13,12 @@
         >
       </swiper-slide>
     </swiper>
-    <div class="swiper-pagination" slot="pagination"></div>
+    <div
+      class="swiper-pagination"
+      slot="pagination"
+      @click="pageClickHandler"
+      ref="pagination"
+    />
   </div>
 </template>
 
@@ -31,8 +36,11 @@ export default {
           bulletClass: 'bullet',
           bulletActiveClass: 'bullet-active'
         },
-        autoplay: true,
-        delay: 2000,
+        autoplay: {
+          disableOnInteraction: false,
+          delay: 1500
+        },
+        initialSlide: 2,
         speed: 500,
         loop: true,
         slidesPerView: 1.4,
@@ -60,6 +68,23 @@ export default {
   methods: {
     bannerClickHandler (targetId) {
       this.$emit('banner', targetId)
+    },
+    pageClickHandler (e) {
+      if (e.target.tagName.toLowerCase() !== 'span') {
+        return
+      }
+      let index = -1
+      Array.from(this.$refs.pagination.children).every((dom, i) => {
+        if (dom === e.target) {
+          index = i
+          return false
+        }
+        return true
+      })
+      if (index !== -1) {
+        console.log(index)
+        this.$refs.swiper.$swiper.slideToLoop(index, 500)
+      }
     }
   }
 }
