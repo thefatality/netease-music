@@ -25,31 +25,30 @@
       </div>
     </div>
     <div class="process-wrapper">
-      <span class="current">{{currentTime}}</span>
-      <div class="line-wrapper">
-        <div class="total-line">
-          <div class="current-line">
-            <div class="line-btn">
-              <div class="inside"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <span class="current">{{passedTime}}</span>
+      <Progress
+        :total="songTime"
+        :current="currentTime"
+        :draggable="!!currentSong.url"
+        @down="songProgressDownHandler"
+        @move="songProgressMoveHandler"
+        @up="songProgressUpHandler"
+        ref="songProcess"
+      />
       <span class="total">{{totalTime}}</span>
     </div>
     <div class="volume-wrapper">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-yinlianglabashengyin"></use>
       </svg>
-      <div class="line-wrapper">
-        <div class="total-line">
-          <div class="current-line">
-            <div class="line-btn">
-              <div class="inside"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Progress
+        :total="1"
+        :current="volume"
+        @down="volumeProgressDownHandler"
+        @move="volumeProgressMoveHandler"
+        @up="volumeProgressUpHandler"
+        ref="volumeProcess"
+      />
     </div>
     <div class="operate-wrapper">
       <svg class="icon" aria-hidden="true">
@@ -79,6 +78,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import Progress from '../base/Progress'
 
 const STATUS_ENUM = {
   STOP: 'stop',
@@ -90,41 +90,93 @@ export default {
   data () {
     return {
       STATUS_ENUM,
-      currentTime: '00:00',
-      totalTime: '00:00',
-      status: STATUS_ENUM.STOP,
-      timer: 0
+      currentTime: 0,
+      songTime: 0,
+      playedTime: 0,
+      volume: 0.5,
+      status: STATUS_ENUM.STOP
     }
+  },
+  mounted () {
+    this.$refs.audio.volume = this.volume
   },
   computed: {
     ...mapState([
       'currentSong'
-    ])
+    ]),
+    passedTime () {
+      return this._formatTime(this.playedTime)
+    },
+    totalTime () {
+      return this._formatTime(this.songTime)
+    }
   },
   methods: {
     canPlayHandler () {
-      this.totalTime = this._formatTime(this.$refs.audio.duration | 0)
+      this.songTime = (this.$refs.audio.duration | 0)
       this.status = this.STATUS_ENUM.PLAY
     },
     endedHandler () {
       this.status = this.STATUS_ENUM.STOP
+      this.playedTime = 0
+      this.currentTime = 0
+      this.$refs.songProcess.setStyleWidth(0)
     },
     changeStatusHandler () {
+      if (!this.$refs.audio.src) {
+        return
+      }
       this.status = this.status === this.STATUS_ENUM.STOP
         ? this.STATUS_ENUM.PLAY
         : this.STATUS_ENUM.STOP
+    },
+    songProgressDownHandler () {
+      clearInterval(this.timer)
+    },
+    songProgressMoveHandler (percentage) {
+      this.playedTime = percentage * this.songTime | 0
+    },
+    songProgressUpHandler () {
+      this._setInterval()
+      this.currentTime = this.playedTime
+      this.$refs.audio.currentTime = this.playedTime
+    },
+    volumeProgressDownHandler () {
+    },
+    volumeProgressMoveHandler (percentage) {
+      this._volume = percentage
+      this.$refs.audio.volume = percentage
+    },
+    volumeProgressUpHandler () {
+      this.volume = this._volume
+      this.$refs.audio.volume = this.volume
     },
     _formatTime (time) {
       const minute = (time / 60) | 0
       const second = time - minute * 60
       return `${minute >= 10 ? minute : '0' + minute}:${second >= 10 ? second : '0' + second}`
+    },
+    _setInterval () {
+      this.timer = setInterval(() => {
+        this.playedTime++
+        this.$refs.songProcess.setStyleWidth(this.playedTime / this.songTime)
+      }, 1000)
     }
   },
   watch: {
-    status (newVal, oldVal) {
+    status () {
       const audio = this.$refs.audio
-      this.status === this.STATUS_ENUM.PLAY ? audio.play() : audio.pause()
+      if (this.status === this.STATUS_ENUM.PLAY) {
+        this._setInterval()
+        audio.play()
+      } else {
+        clearInterval(this.timer)
+        audio.pause()
+      }
     }
+  },
+  components: {
+    Progress
   }
 }
 </script>
@@ -142,45 +194,6 @@ export default {
     .operate-wrapper {
       display: flex;
       align-items: center;
-    }
-
-    .line-wrapper{
-      height: 100%;
-      overflow: hidden;
-      padding: 0 10px;
-      .total-line {
-        flex: 1;
-        position: relative;
-        height: 4px;
-        background: rgb(194, 194, 196);
-        border-radius: 2px;
-        cursor: pointer;
-        .current-line{
-          position: absolute;
-          left: -100%;
-          height: 100%;
-          width: 100%;
-          border-radius: 2px;
-          .line-btn{
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            border: 1px solid rgb(198, 198, 198);
-            background: #fff;
-            text-align: center;
-            .inside{
-              display: inline-block;
-              vertical-align: 5px;
-              width: 4px;
-              height: 4px;
-              border-radius: 50%;
-            }
-          }
-        }
-      }
     }
 
     .operate-song-wrapper {
@@ -236,7 +249,6 @@ export default {
 
     .volume-wrapper {
       padding: 15px;
-      position: relative;
       .icon{
         margin-right: 10px;
         color: rgb(102,102,102);

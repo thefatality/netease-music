@@ -82,8 +82,7 @@ export default {
         return true
       })
       if (index !== -1) {
-        console.log(index)
-        this.$refs.swiper.$swiper.slideToLoop(index, 500)
+        this.$refs.swiper.$swiper.slideToLoop(index, this.swiperOptions.speed)
       }
     }
   }
