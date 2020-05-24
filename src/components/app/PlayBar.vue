@@ -70,7 +70,7 @@
     <audio
       :src="currentSong.url"
       ref="audio"
-      @canplay="canPlayHandler"
+      @loadedmetadata="loadedHandler"
       @ended="endedHandler"
     />
   </div>
@@ -112,8 +112,10 @@ export default {
     }
   },
   methods: {
-    canPlayHandler () {
+    loadedHandler () {
       this.songTime = (this.$refs.audio.duration | 0)
+      this.currentTime = 0
+      this.playedTime = 0
       this.status = this.STATUS_ENUM.PLAY
     },
     endedHandler () {
@@ -137,9 +139,9 @@ export default {
       this.playedTime = percentage * this.songTime | 0
     },
     songProgressUpHandler () {
-      this._setInterval()
       this.currentTime = this.playedTime
       this.$refs.audio.currentTime = this.playedTime
+      this._setInterval()
     },
     volumeProgressDownHandler () {
     },
@@ -164,6 +166,12 @@ export default {
     }
   },
   watch: {
+    currentSong () {
+      this.status = this.STATUS_ENUM.STOP
+      this.playedTime = 0
+      this.currentTime = 0
+      this.$refs.songProcess.setStyleWidth(0)
+    },
     status () {
       const audio = this.$refs.audio
       if (this.status === this.STATUS_ENUM.PLAY) {
@@ -184,8 +192,9 @@ export default {
 <style scoped lang="less">
   #foot-bar {
     display: flex;
-    height: 50px;
+    height: 49px;
     background: rgb(246, 246, 248);
+    border-top: 1px solid rgb(225,225,226);
 
     .operate-song-wrapper,
     .process-wrapper,

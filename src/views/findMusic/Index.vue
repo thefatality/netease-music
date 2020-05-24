@@ -1,13 +1,19 @@
 <template>
   <div id="find-music">
     <find-music-nav />
-    <find-music-banner :banners="banners" @banner="bannerClickHandler" />
+    <find-music-banner
+      :banners="banners"
+      @banner="bannerClickHandler"
+      class="banner-wrapper"
+    />
+    <recommend-song-list class="recommend-song-list" />
   </div>
 </template>
 
 <script>
 import FindMusicNav from './Nav'
 import FindMusicBanner from './Banner'
+import RecommendSongList from './RecommendSongList'
 import { mapMutations } from 'vuex'
 export default {
   name: 'FindMusic',
@@ -21,7 +27,8 @@ export default {
   },
   components: {
     FindMusicNav,
-    FindMusicBanner
+    FindMusicBanner,
+    RecommendSongList
   },
   methods: {
     bannerClickHandler (targetId) {
@@ -59,5 +66,11 @@ export default {
     box-sizing: border-box;
     width: 742px;
     height: 100%;
+    .banner-wrapper{
+      margin-top: 20px;
+    }
+    .recommend-song-list{
+      margin-top: 30px;
+    }
   }
 </style>

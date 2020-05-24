@@ -92,7 +92,6 @@ export default {
 <style scoped lang="less">
   #find-music-banner {
     position: relative;
-    margin-top: 20px;
 
     .swiper-box {
       .swiper-slide {
