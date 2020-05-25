@@ -25,6 +25,7 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'Banner',
@@ -52,22 +53,30 @@ export default {
           depth: 150,
           slideShadows: true
         }
-      }
+      },
+      banners: []
     }
   },
-  props: {
-    banners: {
-      type: Array,
-      required: true
-    }
+  mounted () {
+    this._getBanners()
   },
   components: {
     Swiper,
     SwiperSlide
   },
   methods: {
+    ...mapMutations([
+      'setCurrentSong'
+    ]),
     bannerClickHandler (targetId) {
-      this.$emit('banner', targetId)
+      if (targetId === 0) {
+        return
+      }
+      this._getSongUrl(targetId)
+        .then(res => {
+          const song = res.data[0]
+          this.setCurrentSong(song)
+        })
     },
     pageClickHandler (e) {
       if (e.target.tagName.toLowerCase() !== 'span') {
@@ -84,6 +93,18 @@ export default {
       if (index !== -1) {
         this.$refs.swiper.$swiper.slideToLoop(index, this.swiperOptions.speed)
       }
+    },
+    _getBanners () {
+      this.axios.get('/banner?type=0')
+        .then((res) => {
+          this.banners = res.banners
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    _getSongUrl (targetId) {
+      return this.axios.get(`/song/url?id=${targetId}`)
     }
   }
 }
@@ -92,6 +113,7 @@ export default {
 <style scoped lang="less">
   #find-music-banner {
     position: relative;
+    padding-bottom: 16px;
 
     .swiper-box {
       .swiper-slide {

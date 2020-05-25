@@ -31,7 +31,7 @@
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-erji"></use>
             </svg>
-            {{song.playCount}}
+            {{getPlayCount(song.playCount)}}
           </div>
         </li>
       </ul>
@@ -47,15 +47,22 @@ export default {
   data () {
     return {
       songList: [],
-      week: '星期日',
-      month: 24
+      week: '',
+      month: 0
     }
   },
   mounted () {
-    this.getSongList()
+    this._getDate()
+    this._getSongList()
   },
   methods: {
-    getSongList () {
+    getPlayCount (count) {
+      if (count >= 100000) {
+        return `${(count / 10000) | 0}万`
+      }
+      return count
+    },
+    _getSongList () {
       this.axios.get('/personalized?limit=9')
         .then(res => {
           this.songList = res.result
@@ -63,6 +70,15 @@ export default {
         .catch(err => {
           console.warn(err)
         })
+    },
+    _getDate () {
+      const weeks = [
+        '星期日', '星期一', '星期二', '星期三',
+        '星期四', '星期五', '星期六'
+      ]
+      const date = new Date()
+      this.week = weeks[date.getDay()]
+      this.month = date.getDate()
     }
   },
   components: {
@@ -147,7 +163,7 @@ export default {
           top: 0;
           color: white;
           font-size: 12px;
-          background: rgba(0, 0, 0, .3);
+          background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,.3));
         }
       }
     }

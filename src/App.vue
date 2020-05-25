@@ -5,8 +5,7 @@
       <menu-list></menu-list>
     </div>
     <div class="main-content">
-
-      <router-view />
+      <router-view class="view" />
     </div>
     <play-bar class="play-bar"></play-bar>
   </div>
@@ -52,10 +51,13 @@ export default {
       bottom: 50px;
       left: 220px;
       right: 0;
-      display: flex;
-      height: calc(100vh - 100px); // TitleBar PlayBar的高度都为50px
-      overflow: scroll;
+      overflow-y: scroll;
       background: rgb(250, 250, 250);
+      .view{
+        margin: 0 auto;
+        padding-bottom: 50px;
+        width: 762px;
+      }
     }
     .play-bar{
       position: fixed;

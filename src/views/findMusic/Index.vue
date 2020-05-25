@@ -1,12 +1,11 @@
 <template>
   <div id="find-music">
     <find-music-nav />
-    <find-music-banner
-      :banners="banners"
-      @banner="bannerClickHandler"
-      class="banner-wrapper"
-    />
+    <find-music-banner class="banner-wrapper" />
     <recommend-song-list class="recommend-song-list" />
+    <private-content class="private-content" />
+    <new-song class="new-song" />
+    <recommend-mv class="recommend-mv" />
   </div>
 </template>
 
@@ -14,63 +13,31 @@
 import FindMusicNav from './Nav'
 import FindMusicBanner from './Banner'
 import RecommendSongList from './RecommendSongList'
-import { mapMutations } from 'vuex'
+import PrivateContent from './PrivateContent'
+import NewSong from './NewSong'
+import RecommendMv from './RecommendMv'
 export default {
   name: 'FindMusic',
-  mounted () {
-    this._getBanners()
-  },
-  data () {
-    return {
-      banners: []
-    }
-  },
   components: {
     FindMusicNav,
     FindMusicBanner,
-    RecommendSongList
-  },
-  methods: {
-    bannerClickHandler (targetId) {
-      if (targetId === 0) {
-        return
-      }
-      this._getSongUrl(targetId)
-        .then(res => {
-          const song = res.data[0]
-          this.setCurrentSong(song)
-        })
-    },
-    ...mapMutations([
-      'setCurrentSong'
-    ]),
-    _getBanners () {
-      this.axios.get('/banner?type=0')
-        .then((res) => {
-          this.banners = res.banners
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
-    _getSongUrl (targetId) {
-      return this.axios.get(`/song/url?id=${targetId}`)
-    }
+    RecommendSongList,
+    PrivateContent,
+    NewSong,
+    RecommendMv
   }
 }
 </script>
 
 <style scoped lang="less">
   #find-music {
-    margin: 0 auto;
-    box-sizing: border-box;
-    width: 742px;
-    height: 100%;
     .banner-wrapper{
-      margin-top: 20px;
+      margin: 20px 0;
     }
-    .recommend-song-list{
-      margin-top: 30px;
+    .private-content,
+    .new-song,
+    .recommend-mv{
+      margin-top: 40px;
     }
   }
 </style>

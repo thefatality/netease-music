@@ -43,6 +43,10 @@ export default {
         float: right;
         font-size: 13px;
         color: rgb(102, 102, 102);
+        cursor: pointer;
+        &:hover{
+          color: rgb(68, 68, 68);
+        }
       }
     }
   }
