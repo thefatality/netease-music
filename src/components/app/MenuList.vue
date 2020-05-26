@@ -142,14 +142,16 @@ export default {
 
 <style scoped lang="less">
   #menu-list {
+    box-sizing: border-box;
     padding: 0 10px;
     width: 200px;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: overlay;
     line-height: 30px;
     background: rgb(245, 245, 247);
     color: rgb(92, 92, 92);
     font-size: 13px;
+    border-right: 1px solid rgb(225,225,226);
 
     .level1 {
       margin-right: 10px;

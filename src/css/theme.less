@@ -1,26 +1,13 @@
+@import url(./variable);
+
 .cool-black {
-  background: rgb(34, 34, 34);
-  border-color: rgb(34, 34, 34);
-}
-
-.official-red {
-  background: rgb(198, 47, 47);
-  border-color: rgb(198, 47, 47);
-}
-
-.cute-pink {
-  background: rgb(250, 136, 176);
-  border-color: rgb(250, 136, 176);
-}
-
-.sky-blue {
   #title-bar { // 头部菜单栏 components/app/TitleBar.vue
-    background: rgb(83, 178, 250);
+    background: @cool-black;
   }
 
   #menu-list { // 左侧导航栏 components/app/MenuList.vue
     .menu-item.active {
-      border-color: rgb(83, 178, 250);
+      border-color: @cool-black;
     }
   }
 
@@ -30,23 +17,21 @@
     .next-song,
     .current-line,
     .inside {
-      background-color: rgb(83, 178, 250);
+      background-color: @cool-black;
     }
   }
 
   #find-music-nav { // 发现音乐导航条 views/findMusic/Nav.vue
-    .nav-list {
-      .nav-item {
-        &.active {
-          color: rgb(83, 178, 250);
-        }
+    .nav-item {
+      &.active {
+        color: @cool-black;
       }
     }
   }
 
   #find-music-banner{ // views/findMusic/Banner.vue
     .bullet-active {
-      background: rgb(83, 178, 250);
+      background: @cool-black;
     }
   }
 
@@ -56,21 +41,315 @@
         &.custom{
           .date{
             .month{
-              color: rgb(83, 178, 250);
+              color: @cool-black;
             }
           }
         }
       }
     }
   }
+
+  #search-res-nav{
+    .nav-item{
+      &.active{
+        border-bottom-color: @cool-black;
+        color: @cool-black;
+      }
+    }
+  }
+}
+
+.official-red {
+  #title-bar { // 头部菜单栏 components/app/TitleBar.vue
+    background: @official-red;
+  }
+
+  #menu-list { // 左侧导航栏 components/app/MenuList.vue
+    .menu-item.active {
+      border-color: @official-red;
+    }
+  }
+
+  #foot-bar { // 底部播放栏 components/app/PlayBar.vue
+    .prev-song,
+    .play-stop-song,
+    .next-song,
+    .current-line,
+    .inside {
+      background-color: @official-red;
+    }
+  }
+
+  #find-music-nav { // 发现音乐导航条 views/findMusic/Nav.vue
+    .nav-item {
+      &.active {
+        color: @official-red;
+      }
+    }
+  }
+
+  #find-music-banner{ // views/findMusic/Banner.vue
+    .bullet-active {
+      background: @official-red;
+    }
+  }
+
+  #recommend-song-list{ // views/findMusic/RecommendSongList.vue
+    .song-list{
+      .song-item{
+        &.custom{
+          .date{
+            .month{
+              color: @official-red;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #search-res-nav{
+    .nav-item{
+      &.active{
+        border-bottom-color: @official-red;
+        color: @official-red;
+      }
+    }
+  }
+}
+
+.cute-pink {
+  #title-bar { // 头部菜单栏 components/app/TitleBar.vue
+    background: @cute-pink;
+  }
+
+  #menu-list { // 左侧导航栏 components/app/MenuList.vue
+    .menu-item.active {
+      border-color: @cute-pink;
+    }
+  }
+
+  #foot-bar { // 底部播放栏 components/app/PlayBar.vue
+    .prev-song,
+    .play-stop-song,
+    .next-song,
+    .current-line,
+    .inside {
+      background-color: @cute-pink;
+    }
+  }
+
+  #find-music-nav { // 发现音乐导航条 views/findMusic/Nav.vue
+    .nav-item {
+      &.active {
+        color: @cute-pink;
+      }
+    }
+  }
+
+  #find-music-banner{ // views/findMusic/Banner.vue
+    .bullet-active {
+      background: @cute-pink;
+    }
+  }
+
+  #recommend-song-list{ // views/findMusic/RecommendSongList.vue
+    .song-list{
+      .song-item{
+        &.custom{
+          .date{
+            .month{
+              color: @cute-pink;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #search-res-nav{
+    .nav-item{
+      &.active{
+        border-bottom-color: @cute-pink;
+        color: @cute-pink;
+      }
+    }
+  }
+}
+
+.sky-blue {
+  #title-bar { // 头部菜单栏 components/app/TitleBar.vue
+    background: @sky-blue;
+  }
+
+  #menu-list { // 左侧导航栏 components/app/MenuList.vue
+    .menu-item.active {
+      border-color: @sky-blue;
+    }
+  }
+
+  #foot-bar { // 底部播放栏 components/app/PlayBar.vue
+    .prev-song,
+    .play-stop-song,
+    .next-song,
+    .current-line,
+    .inside {
+      background-color: @sky-blue;
+    }
+  }
+
+  #find-music-nav { // 发现音乐导航条 views/findMusic/Nav.vue
+    .nav-item {
+      &.active {
+        color: @sky-blue;
+      }
+    }
+  }
+
+  #find-music-banner{ // views/findMusic/Banner.vue
+    .bullet-active {
+      background: @sky-blue;
+    }
+  }
+
+  #recommend-song-list{ // views/findMusic/RecommendSongList.vue
+    .song-list{
+      .song-item{
+        &.custom{
+          .date{
+            .month{
+              color: @sky-blue;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #search-res-nav{
+    .nav-item{
+      &.active{
+        border-bottom-color: @sky-blue;
+        color: @sky-blue;
+      }
+    }
+  }
 }
 
 .fresh-green {
-  background: rgb(69, 190, 122);
-  border-color: rgb(69, 190, 122);
+  #title-bar { // 头部菜单栏 components/app/TitleBar.vue
+    background: @fresh-green;
+  }
+
+  #menu-list { // 左侧导航栏 components/app/MenuList.vue
+    .menu-item.active {
+      border-color: @fresh-green;
+    }
+  }
+
+  #foot-bar { // 底部播放栏 components/app/PlayBar.vue
+    .prev-song,
+    .play-stop-song,
+    .next-song,
+    .current-line,
+    .inside {
+      background-color: @fresh-green;
+    }
+  }
+
+  #find-music-nav { // 发现音乐导航条 views/findMusic/Nav.vue
+    .nav-item {
+      &.active {
+        color: @fresh-green;
+      }
+    }
+  }
+
+  #find-music-banner{ // views/findMusic/Banner.vue
+    .bullet-active {
+      background: @fresh-green;
+    }
+  }
+
+  #recommend-song-list{ // views/findMusic/RecommendSongList.vue
+    .song-list{
+      .song-item{
+        &.custom{
+          .date{
+            .month{
+              color: @fresh-green;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #search-res-nav{
+    .nav-item{
+      &.active{
+        border-bottom-color: @fresh-green;
+        color: @fresh-green;
+      }
+    }
+  }
 }
 
 .wealthy-gold {
-  background: rgb(210, 143, 71);
-  border-color: rgb(210, 143, 71);
+  #title-bar { // 头部菜单栏 components/app/TitleBar.vue
+    background: @wealthy-gold;
+  }
+
+  #menu-list { // 左侧导航栏 components/app/MenuList.vue
+    .menu-item.active {
+      border-color: @wealthy-gold;
+    }
+  }
+
+  #foot-bar { // 底部播放栏 components/app/PlayBar.vue
+    .prev-song,
+    .play-stop-song,
+    .next-song,
+    .current-line,
+    .inside {
+      background-color: @wealthy-gold;
+    }
+  }
+
+  #find-music-nav { // 发现音乐导航条 views/findMusic/Nav.vue
+    .nav-item {
+      &.active {
+        color: @wealthy-gold;
+      }
+    }
+  }
+
+  #find-music-banner{ // views/findMusic/Banner.vue
+    .bullet-active {
+      background: @wealthy-gold;
+    }
+  }
+
+  #recommend-song-list{ // views/findMusic/RecommendSongList.vue
+    .song-list{
+      .song-item{
+        &.custom{
+          .date{
+            .month{
+              color: @wealthy-gold;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #search-res-nav{
+    .nav-item{
+      &.active{
+        border-bottom-color: @wealthy-gold;
+        color: @wealthy-gold;
+      }
+    }
+  }
 }

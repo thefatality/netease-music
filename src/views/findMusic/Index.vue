@@ -31,6 +31,8 @@ export default {
 
 <style scoped lang="less">
   #find-music {
+    margin: 0 auto;
+    width: 762px;
     .banner-wrapper{
       margin: 20px 0;
     }
